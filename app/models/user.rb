@@ -21,6 +21,7 @@
 #  fk_rails_...  (residence_country_id => countries.id)
 #
 class User < ApplicationRecord
+  has_many :reviews
   belongs_to :nationality, class_name: "Country"
   belongs_to :residence_country, class_name: "Country"
 end
