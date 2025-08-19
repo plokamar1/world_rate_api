@@ -16,6 +16,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_120447) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name", null: false
+    t.string "code", null: false
     t.float "rating", default: 0.0, null: false
     t.boolean "calculated", default: true, null: false
     t.integer "reviews_count", default: 0, null: false

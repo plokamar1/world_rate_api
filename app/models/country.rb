@@ -4,6 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  calculated    :boolean          default(TRUE), not null
+#  code          :string           not null
 #  name          :string           not null
 #  rating        :float            default(0.0), not null
 #  reviews_count :integer          default(0), not null
