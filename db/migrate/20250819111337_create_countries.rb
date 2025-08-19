@@ -3,7 +3,8 @@ class CreateCountries < ActiveRecord::Migration[8.0]
     create_table :countries do |t|
       t.string :name, null: false
       t.float :rating, null: false, default: 0.0
-      t.boolean :calculate_rating, null: false, default: false
+      t.boolean :calculated, null: false, default: true
+      t.integer :reviews_count, default: 0, null: false
       t.timestamps
     end
   end
