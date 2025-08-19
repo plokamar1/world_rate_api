@@ -17,8 +17,9 @@
 #
 # Indexes
 #
-#  index_reviews_on_country_id  (country_id)
-#  index_reviews_on_user_id     (user_id)
+#  index_reviews_on_country_id              (country_id)
+#  index_reviews_on_country_id_and_user_id  (country_id,user_id) UNIQUE
+#  index_reviews_on_user_id                 (user_id)
 #
 # Foreign Keys
 #

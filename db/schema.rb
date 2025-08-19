@@ -17,7 +17,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_120447) do
   create_table "countries", force: :cascade do |t|
     t.string "name", null: false
     t.float "rating", default: 0.0, null: false
-    t.boolean "calculate_rating", default: false, null: false
+    t.boolean "calculated", default: true, null: false
+    t.integer "reviews_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -34,6 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_120447) do
     t.float "total_rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["country_id", "user_id"], name: "index_reviews_on_country_id_and_user_id", unique: true
     t.index ["country_id"], name: "index_reviews_on_country_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
