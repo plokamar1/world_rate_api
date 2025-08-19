@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_19_111337) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_19_120447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,4 +21,36 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_19_111337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "country_id"
+    t.bigint "user_id"
+    t.text "description"
+    t.integer "food_rating", limit: 2, default: 0
+    t.integer "nightlife_rating", limit: 2, default: 0
+    t.integer "culture_rating", limit: 2, default: 0
+    t.integer "transportation_rating", limit: 2, default: 0
+    t.integer "expenses_rating", limit: 2, default: 0
+    t.float "total_rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_reviews_on_country_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username", null: false
+    t.integer "reviews_count", default: 0, null: false
+    t.bigint "nationality_id"
+    t.bigint "residence_country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nationality_id"], name: "index_users_on_nationality_id"
+    t.index ["residence_country_id"], name: "index_users_on_residence_country_id"
+  end
+
+  add_foreign_key "reviews", "countries"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "users", "countries", column: "nationality_id"
+  add_foreign_key "users", "countries", column: "residence_country_id"
 end
