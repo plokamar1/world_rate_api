@@ -29,4 +29,14 @@ RSpec.describe Country, type: :model do
     it { should have_many(:residents) }
     it { should have_many(:natives) }
   end
+
+  describe "counters" do
+    subject { build(:country) }
+
+    it "updates the reviews_count when reviews get created" do
+      user = create(:user)
+      create(:review, user: user, country: subject)
+      expect(user.reviews_count).to eq(user.reviews.size)
+    end
+  end
 end

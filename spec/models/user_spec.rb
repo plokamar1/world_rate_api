@@ -26,4 +26,11 @@ RSpec.describe User, type: :model do
     it { should belong_to(:nationality) }
     it { should belong_to(:residence_country) }
   end
+
+  describe "counters" do
+    it "updates the reviews_count when reviews get created" do
+      user = create(:user, :with_reviews)
+      expect(user.reviews_count).to eq(user.reviews.size)
+    end
+  end
 end
