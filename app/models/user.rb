@@ -21,7 +21,13 @@
 #  fk_rails_...  (residence_country_id => countries.id)
 #
 class User < ApplicationRecord
+  ##
+  # Associations
   has_many :reviews
   belongs_to :nationality, class_name: "Country"
   belongs_to :residence_country, class_name: "Country"
+  ##
+  # Validations
+  validates :username, :reviews_count, presence: true
+  validates_uniqueness_of :username
 end
