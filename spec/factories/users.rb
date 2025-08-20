@@ -12,8 +12,16 @@ FactoryBot.define do
     # end
     #
     trait :with_reviews do
-      after(:create) do |user|
-        create_list(:review, 3)
+      transient do
+        review_country { nil }
+        review_count { 3 }
+      end
+      after(:create) do |user, evaluator|
+        if (country = evaluator.review_country).present?
+          create(:review, user: user, country: country)
+        else
+          create_list(:review, evaluator.review_count, user: user)
+        end
       end
     end
   end
