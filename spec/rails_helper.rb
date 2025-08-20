@@ -76,4 +76,5 @@ RSpec.configure do |config|
   config.profile_examples = 10
 
   config.infer_spec_type_from_file_location!
+  config.use_transactional_examples = true
 end
