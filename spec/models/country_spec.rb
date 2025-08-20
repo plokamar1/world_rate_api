@@ -20,6 +20,8 @@ RSpec.describe Country, type: :model do
     it { should validate_presence_of(:calculated) }
     it { should validate_presence_of(:rating) }
     it { should validate_presence_of(:reviews_count) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_uniqueness_of(:code) }
   end
 
   describe "associations" do
@@ -36,7 +38,7 @@ RSpec.describe Country, type: :model do
     it "updates the reviews_count when reviews get created" do
       user = create(:user)
       create(:review, user: user, country: subject)
-      expect(user.reviews_count).to eq(user.reviews.size)
+      expect(subject.reviews_count).to eq(Review.where(country_id: subject.id).size)
     end
   end
 end
