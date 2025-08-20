@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+CS.countries.each do |k,v|
+  Country.create!(name: v, code: k, calculated: true )
+end
