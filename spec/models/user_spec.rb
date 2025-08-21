@@ -24,8 +24,8 @@ RSpec.describe User, type: :model do
     subject { build(:user) }
 
     it { should have_many(:reviews) }
-    it { should belong_to(:nationality) }
-    it { should belong_to(:residence_country) }
+    it { should belong_to(:nationality).optional }
+    it { should belong_to(:residence_country).optional }
   end
 
   describe "counters" do

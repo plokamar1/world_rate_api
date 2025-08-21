@@ -24,8 +24,8 @@ class User < ApplicationRecord
   ##
   # Associations
   has_many :reviews
-  belongs_to :nationality, class_name: "Country"
-  belongs_to :residence_country, class_name: "Country"
+  belongs_to :nationality, class_name: "Country", optional: true
+  belongs_to :residence_country, class_name: "Country", optional: true
   ##
   # Validations
   validates :username, :reviews_count, presence: true
