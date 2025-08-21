@@ -27,6 +27,39 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Review < ApplicationRecord
+  attr_readonly :total_rating
+  ##
+  # Associations
   belongs_to :country, counter_cache: true
   belongs_to :user, counter_cache: true
+
+  ##
+  # Validations
+  validates :description, length: { maximum: 500 }
+  validates_uniqueness_of :user_id, scope: [:country_id]
+  validates :culture_rating, :expenses_rating, :food_rating, :nightlife_rating, :transportation_rating,
+            numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
+  validates :total_rating,
+            numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+
+  ##
+  # Callbacks
+  before_validation :calculate_total_rating
+  after_commit :set_calculated_to_false
+
+  private
+
+    def set_calculated_to_false
+      country.update(calculated: false)
+    end
+
+    def calculate_total_rating
+      ratings = [culture_rating, expenses_rating, food_rating, nightlife_rating, transportation_rating]
+                  .keep_if { |r| r.present? }
+      return if ratings.empty?
+
+      sum = ratings.sum
+      self.total_rating = sum / ratings.size
+    end
+
 end
