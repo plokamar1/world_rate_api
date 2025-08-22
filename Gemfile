@@ -47,15 +47,14 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
+  gem "factory_bot_rails" # for test data
+  gem "faker" # for fake data
+  gem "simplecov", require: false
   gem "annotaterb"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "rspec-rails"
-  gem "factory_bot_rails" # for test data
-  gem "faker" # for fake data
   gem "shoulda-matchers" # for Rails-specific matchers
-  gem "simplecov", require: false
 end

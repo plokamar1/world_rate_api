@@ -370,6 +370,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  jsonapi-rails
   kamal
   pg (~> 1.1)
   puma (>= 5.0)
