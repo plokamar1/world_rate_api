@@ -3,10 +3,11 @@ module Api
     class ApiController < ActionController::API
       before_action :initialize_model
       before_action :initialize_object, only: %w[show update destroy]
+      before_action :set_pagination, only: :index
 
       # GET /models
       def index
-        @collection = @model.all
+        @collection = @model.all.limit(@per_page).offset(@offset)
 
         render json: @collection
       end
@@ -51,6 +52,14 @@ module Api
         # Use callbacks to share common setup or constraints between actions.
         def initialize_object
           @object = @model.find(params.expect(:id))
+        end
+
+        def set_pagination
+          total_results = Rails.configuration.world_rate.dig(:requests, :max_results)
+          @per_page = params[:per_page].presence || total_results
+          @per_page = total_results if @per_page > total_results
+          @page = params[:page].presence || 1
+          @offset = (Integer(@page) - 1) * Integer(@per_page)
         end
 
         # Only allow a list of trusted parameters through.
