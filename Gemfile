@@ -38,6 +38,10 @@ gem "thruster", require: false
 # gem to seed with countries
 gem "city-state"
 
+gem "ransack"
+# Need active model serializer gem to manipulate our response data
+gem "jsonapi.rb"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
