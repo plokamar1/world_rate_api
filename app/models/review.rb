@@ -29,7 +29,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Review < ApplicationRecord
-  attr_readonly :total_rating
+  attr_readonly :total_rating, :weight
   ##
   # Associations
   belongs_to :country, counter_cache: true
@@ -37,16 +37,19 @@ class Review < ApplicationRecord
 
   ##
   # Validations
-  validates :description, length: { maximum: 500 }
+  validates :description, length: { maximum: 500 }, presence: true
   validates_uniqueness_of :user_id, scope: [:country_id]
-  validates :culture_rating, :expenses_rating, :food_rating, :nightlife_rating, :transportation_rating,
+  validates :safety_rating, :food_rating, :nightlife_rating, :transportation_rating,
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
   validates :total_rating,
             numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+  validates :weight, inclusion: { in: 0.1..1.0 }
+  validates :total_expenses, inclusion: { in: [100, 500, 1000, 2000, 5000] }, allow_nil: true
 
   ##
   # Callbacks
   before_validation :calculate_total_rating
+  before_validation :calculate_total_weight
   after_commit :set_calculated_to_false
 
   private
@@ -56,12 +59,18 @@ class Review < ApplicationRecord
     end
 
     def calculate_total_rating
-      ratings = [culture_rating, expenses_rating, food_rating, nightlife_rating, transportation_rating]
+      ratings = [safety_rating, food_rating, nightlife_rating, transportation_rating]
                   .keep_if { |r| r.present? }
       return if ratings.empty?
 
       sum = ratings.sum
       self.total_rating = sum / ratings.size
+    end
+
+    def calculate_total_weight
+      self.weight = Rails.configuration.world_rate.dig(:reviews_weight).sum do |attribute, weight_value|
+        self.send(attribute).present? ? weight_value.to_f : 0
+      end
     end
 
 end
