@@ -1,0 +1,19 @@
+default: &default
+  requests:
+    max_results: 50
+  reviews_weight:
+    description: 0.3,
+    total_expenses: 0.3,
+    safety_rating: 0.1,
+    food_rating: 0.1,
+    nightlife_rating: 0.1,
+    transportation_rating: 0.1
+
+development:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default
+test:
+  <<: *default

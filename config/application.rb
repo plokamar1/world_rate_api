@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require 'ostruct'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,6 +24,7 @@ module WorldRateApi
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.world_rate = config_for(:world_rate).with_indifferent_access
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
