@@ -26,8 +26,8 @@
 #
 FactoryBot.define do
   factory :user do
-    username { Faker::Internet.username(specifier: 5..10) }
-    email { Faker::Internet.email }
+    username { Faker::Internet.unique.username(specifier: 5..10) }
+    email { Faker::Internet.unique.email }
     traits_for_enum(:gender)
     association :nationality, factory: :country
     association :residence_country, factory: :country
