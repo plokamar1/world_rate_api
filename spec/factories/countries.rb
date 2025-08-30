@@ -15,7 +15,7 @@
 #
 FactoryBot.define do
   factory :country do
-    name { Faker::Address.country }
-    code { Faker::Address.country_code }
+    code { Faker::Address.unique.country_code }
+    name { Faker::Address.unique.country }
   end
 end

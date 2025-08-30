@@ -30,6 +30,11 @@ class User < ApplicationRecord
   belongs_to :residence_country, class_name: "Country", optional: true
   ##
   # Validations
-  validates :username, :reviews_count, presence: true
+  validates :username, :reviews_count, :email, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates_uniqueness_of :username
+
+  ##
+  # Enums
+  enum :gender, [:female, :male, :transgender]
 end

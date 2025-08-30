@@ -5,6 +5,8 @@
 # Table name: users
 #
 #  id                   :bigint           not null, primary key
+#  email                :string           not null
+#  gender               :integer
 #  reviews_count        :integer          default(0), not null
 #  username             :string           not null
 #  created_at           :datetime         not null
@@ -40,6 +42,11 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:username) }
     it { should validate_presence_of(:reviews_count) }
     it { should validate_uniqueness_of(:username) }
+    it { should validate_uniqueness_of(:email) }
+    it { should_not allow_value("test_com").for(:email) }
+    it { should_not allow_value("test.com").for(:email) }
+    it { should allow_value("test_test@test.com").for(:email) }
+    it { should define_enum_for(:gender).with_values([:female, :male, :transgender]) }
   end
 
   describe "associations" do

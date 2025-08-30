@@ -5,6 +5,8 @@
 # Table name: users
 #
 #  id                   :bigint           not null, primary key
+#  email                :string           not null
+#  gender               :integer
 #  reviews_count        :integer          default(0), not null
 #  username             :string           not null
 #  created_at           :datetime         not null
@@ -25,6 +27,8 @@
 FactoryBot.define do
   factory :user do
     username { Faker::Internet.username(specifier: 5..10) }
+    email { Faker::Internet.email }
+    traits_for_enum(:gender)
     association :nationality, factory: :country
     association :residence_country, factory: :country
 
