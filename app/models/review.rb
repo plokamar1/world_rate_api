@@ -53,8 +53,9 @@ class Review < ApplicationRecord
 
   ##
   # Callbacks
-  before_validation :calculate_total_rating
-  before_validation :calculate_total_weight
+  before_validation :calculate_total_rating!
+  before_validation :calculate_total_weight!
+  # TODO: move this to a service
   after_commit :set_calculated_to_false
 
   private
@@ -63,7 +64,9 @@ class Review < ApplicationRecord
       country.update(calculated: false)
     end
 
-    def calculate_total_rating
+    # Callback
+    # calculates total rating of the review
+    def calculate_total_rating!
       ratings = [safety_rating, food_rating, nightlife_rating, transportation_rating]
                   .keep_if { |r| r.present? }
       return if ratings.empty?
@@ -72,7 +75,11 @@ class Review < ApplicationRecord
       self.total_rating = sum / ratings.size
     end
 
-    def calculate_total_weight
+    # Callback
+    # calculates the total weight of the review by fetching data from app configuration
+    # The more fields the user has filled in their review the more weight is getting added.
+    # This weight will be used to calculate the total review of the country.
+    def calculate_total_weight!
       self.weight = Rails.configuration.world_rate.dig(:reviews_weight).sum do |attribute, weight_value|
         self.send(attribute).present? ? weight_value.to_f : 0
       end
