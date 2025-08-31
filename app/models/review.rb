@@ -29,11 +29,16 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Review < ApplicationRecord
+  # TODO:
+  # - Add verification attribute (boolean)
+  # - Pass attributes through an AI assistant to check toxicity, racism, bad language
+  # - Add attribute that describes if the user found the country expensive (boolean)
   attr_readonly :total_rating, :weight
   ##
   # Associations
   belongs_to :country, counter_cache: true
   belongs_to :user, counter_cache: true
+  has_and_belongs_to_many :cities
 
   ##
   # Validations

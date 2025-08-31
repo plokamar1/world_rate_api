@@ -13,8 +13,14 @@
 #
 class Country < ApplicationRecord
   ##
+  # TODO:
+  # - Add cities that belong to countries.
+  # - The reviews should belong to a city not a country and the country will have association through the cities
+  #
+  ##
   # Associations
   has_many :reviews
+  has_many :cities
   has_many :residents, class_name: "User", foreign_key: :residence_country_id
   has_many :natives, class_name: "User", foreign_key: :nationality_id
   ##
