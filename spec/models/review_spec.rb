@@ -74,6 +74,13 @@ RSpec.describe Review, type: :model do
       expect { create(:review, country: country) }.to change(country, :calculated)
     end
 
+    it "updates cities calculated attribute" do
+      cities = create_list(:city, 2)
+      expect { create(:review, cities: cities) }.to change {
+        cities.all? { |c| c.calculated == false }
+      }
+    end
+
     it "calculates weight before validation" do
       country = create(:country)
       review = create(:review, country: country,
