@@ -18,4 +18,13 @@ FactoryBot.define do
     code { Faker::Address.unique.country_code }
     name { Faker::Address.unique.country }
   end
+
+  trait :with_cities do
+    transient do
+      count { 10 }
+    end
+    after(:create) do |country, evaluator|
+      create_list(:city, evaluator.count, user: country)
+    end
+  end
 end

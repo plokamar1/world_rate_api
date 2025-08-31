@@ -43,6 +43,7 @@ RSpec.describe Country, type: :model do
     it { should have_many(:reviews) }
     it { should have_many(:residents) }
     it { should have_many(:natives) }
+    it { should have_many(:cities) }
   end
 
   describe "counters" do

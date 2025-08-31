@@ -65,6 +65,7 @@ RSpec.describe Review, type: :model do
 
     it { should belong_to(:user) }
     it { should belong_to(:country) }
+    it { should have_and_belong_to_many(:cities) }
   end
 
   describe "business" do
