@@ -3,7 +3,9 @@
 # Table name: cities
 #
 #  id         :bigint           not null, primary key
+#  calculated :boolean          default(TRUE), not null
 #  name       :string           not null
+#  rating     :float            default(0.0), not null
 #  state      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

@@ -56,12 +56,17 @@ class Review < ApplicationRecord
   before_validation :calculate_total_rating!
   before_validation :calculate_total_weight!
   # TODO: move this to a service
-  after_commit :set_calculated_to_false
+  after_commit :set_calculated_to_false_in_country
+  after_commit :set_calculated_to_false_in_cities
 
   private
 
-    def set_calculated_to_false
+    def set_calculated_to_false_in_country
       country.update(calculated: false)
+    end
+
+    def set_calculated_to_false_in_cities
+      cities.update(calculated: false)
     end
 
     # Callback
