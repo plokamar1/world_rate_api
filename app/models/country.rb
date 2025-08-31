@@ -14,9 +14,8 @@
 class Country < ApplicationRecord
   ##
   # TODO:
-  # - Add cities that belong to countries.
   # - The reviews should belong to a city not a country and the country will have association through the cities
-  #
+
   ##
   # Associations
   has_many :reviews
