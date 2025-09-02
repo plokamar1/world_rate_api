@@ -24,5 +24,5 @@ class City < ApplicationRecord
   ##
   # Validations
   validates :name, presence: true
-  validates_uniqueness_of :name, scope: [:country_id]
+  validates_uniqueness_of :name, scope: [ :country_id ]
 end

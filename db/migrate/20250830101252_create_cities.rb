@@ -8,6 +8,6 @@ class CreateCities < ActiveRecord::Migration[8.0]
       t.boolean :calculated, null: false, default: true
       t.timestamps
     end
-    add_index :cities, [:country_id, :name], unique: true
+    add_index :cities, [ :country_id, :name ], unique: true
   end
 end

@@ -21,7 +21,6 @@ class CalculateCityRatingService < BaseService
     end
 
     reviews.select(:total_rating, :weight).each do |review|
-
       @total_weighted_rating += review.total_rating * review.weight
     end
 

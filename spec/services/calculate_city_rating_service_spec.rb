@@ -9,8 +9,8 @@ RSpec.describe CalculateCityRatingService do
   describe "#call" do
     context "when city has reviews" do
       before do
-        create(:review, total_rating: 8.0, weight: 0.9, cities: [city])
-        create(:review, total_rating: 6.0, weight: 0.8, cities: [city])
+        create(:review, total_rating: 8.0, weight: 0.9, cities: [ city ])
+        create(:review, total_rating: 6.0, weight: 0.8, cities: [ city ])
       end
 
       it "calculates and updates the city's total rating" do
@@ -40,7 +40,7 @@ RSpec.describe CalculateCityRatingService do
 
     context "when an exception occurs during calculation" do
       before do
-        create(:review, total_rating: 8.0, weight: 0.9, cities: [city])
+        create(:review, total_rating: 8.0, weight: 0.9, cities: [ city ])
         allow(city).to receive(:update).and_raise(StandardError, "Database error")
       end
 
@@ -48,7 +48,7 @@ RSpec.describe CalculateCityRatingService do
         result = service.call
         expect(service.errors.first).to match(/Failed to calculate city rating: Database error/)
         city.reload
-        expect(city.rating).to eq(0 )
+        expect(city.rating).to eq(0)
         expect(city.calculated).to be false
       end
     end

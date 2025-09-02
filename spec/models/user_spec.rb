@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
     it { should_not allow_value("test_com").for(:email) }
     it { should_not allow_value("test.com").for(:email) }
     it { should allow_value("test_test@test.com").for(:email) }
-    it { should define_enum_for(:gender).with_values([:female, :male, :transgender]) }
+    it { should define_enum_for(:gender).with_values([ :female, :male, :transgender ]) }
   end
 
   describe "associations" do

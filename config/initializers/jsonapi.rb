@@ -1,3 +1,3 @@
-require 'jsonapi'
+require "jsonapi"
 
 JSONAPI::Rails.install!

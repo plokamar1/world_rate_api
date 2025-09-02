@@ -18,7 +18,7 @@ RSpec.describe BaseService do
     end
 
     it "with errors" do
-      service.send(:add_error,"Another error")
+      service.send(:add_error, "Another error")
       expect(service.errors.size).to eq(1)
       expect(service.success?).to be false
     end
@@ -31,7 +31,7 @@ RSpec.describe BaseService do
     end
 
     it "with errors" do
-      service.send(:add_error,"Another error")
+      service.send(:add_error, "Another error")
       expect(service.errors.size).to eq(1)
       expect(service.failure?).to be true
     end

@@ -52,12 +52,11 @@ RSpec.describe Review, type: :model do
     it { should validate_comparison_of(:nightlife_rating).is_greater_than_or_equal_to(1).is_less_than_or_equal_to(10).allow_nil }
     it { should validate_comparison_of(:transportation_rating).is_greater_than_or_equal_to(1).is_less_than_or_equal_to(10).allow_nil }
 
-    it { should validate_inclusion_of(:total_expenses).in_array([100, 500, 1000, 2000, 5000]).allow_nil }
+    it { should validate_inclusion_of(:total_expenses).in_array([ 100, 500, 1000, 2000, 5000 ]).allow_nil }
     it { should have_readonly_attribute(:total_rating) }
     it { should have_readonly_attribute(:weight) }
     it { should validate_comparison_of(:weight).is_greater_than(0).is_less_than_or_equal_to(1) }
     it { should validate_uniqueness_of(:user_id).scoped_to(:country_id) }
-
   end
 
   describe "associations" do

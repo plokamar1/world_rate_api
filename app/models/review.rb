@@ -43,13 +43,13 @@ class Review < ApplicationRecord
   ##
   # Validations
   validates :description, length: { maximum: 500 }, presence: true
-  validates_uniqueness_of :user_id, scope: [:country_id]
+  validates_uniqueness_of :user_id, scope: [ :country_id ]
   validates :safety_rating, :food_rating, :nightlife_rating, :transportation_rating,
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
   validates :total_rating,
             numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
   validates :weight, inclusion: { in: 0.1..1.0 }
-  validates :total_expenses, inclusion: { in: [100, 500, 1000, 2000, 5000] }, allow_nil: true
+  validates :total_expenses, inclusion: { in: [ 100, 500, 1000, 2000, 5000 ] }, allow_nil: true
 
   ##
   # Callbacks
@@ -72,7 +72,7 @@ class Review < ApplicationRecord
     # Callback
     # calculates total rating of the review
     def calculate_total_rating!
-      ratings = [safety_rating, food_rating, nightlife_rating, transportation_rating]
+      ratings = [ safety_rating, food_rating, nightlife_rating, transportation_rating ]
                   .keep_if { |r| r.present? }
       return if ratings.empty?
 
@@ -89,5 +89,4 @@ class Review < ApplicationRecord
         self.send(attribute).present? ? weight_value.to_f : 0
       end
     end
-
 end

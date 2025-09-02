@@ -31,7 +31,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
-  enum_values = [100, 500, 1000, 2000, 5000]
+  enum_values = [ 100, 500, 1000, 2000, 5000 ]
   factory :review do
     country
     user

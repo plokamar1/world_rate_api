@@ -36,5 +36,5 @@ class User < ApplicationRecord
 
   ##
   # Enums
-  enum :gender, [:female, :male, :transgender]
+  enum :gender, [ :female, :male, :transgender ]
 end
