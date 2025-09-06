@@ -9,6 +9,8 @@ class CreateReviews < ActiveRecord::Migration[8.0]
       t.integer :nightlife_rating, default: 0
       t.integer :transportation_rating, default: 0
       t.integer :safety_rating, default: 0
+      t.integer :nature_rating, default: 0
+      t.integer :sightseeing_rating, default: 0
       t.integer :days_visited, null: false
 
       t.integer :total_expenses, default: 100
