@@ -8,8 +8,10 @@
 #  days_visited          :integer          not null
 #  description           :text             not null
 #  food_rating           :integer          default(0)
+#  nature_rating         :integer          default(0)
 #  nightlife_rating      :integer          default(0)
 #  safety_rating         :integer          default(0)
+#  sightseeing_rating    :integer          default(0)
 #  total_expenses        :integer          default(100)
 #  total_rating          :float
 #  transportation_rating :integer          default(0)
