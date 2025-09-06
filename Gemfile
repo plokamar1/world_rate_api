@@ -55,6 +55,7 @@ group :development, :test do
   gem "faker" # for fake data
   gem "simplecov", require: false
   gem "annotaterb"
+  gem "solargraph"
 end
 
 group :test do
