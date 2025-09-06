@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-CS.countries.each do |k,v|
-  Country.create!(name: v, code: k, calculated: true )
+CS.countries.each do |code, name|
+  country = Country.find_or_initialize_by(code: code)
+  country.update!(name: name, code: code)
 end
