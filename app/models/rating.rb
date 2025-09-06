@@ -6,14 +6,14 @@
 #  food_rating           :integer          default(0)
 #  nature_rating         :integer          default(0)
 #  nightlife_rating      :integer          default(0)
-#  ratable_type          :string
+#  ratable_type          :string           not null
 #  safety_rating         :integer          default(0)
 #  sightseeing_rating    :integer          default(0)
 #  total_rating          :float
 #  transportation_rating :integer          default(0)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  ratable_id            :bigint
+#  ratable_id            :bigint           not null
 #
 class Rating < ApplicationRecord
   # Associations
