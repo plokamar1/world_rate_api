@@ -50,13 +50,13 @@ class Review < ApplicationRecord
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
   validates :total_rating,
             numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
-  validates :weight, inclusion: { in: 0.1..1.0 }
+  validates :weight, numericality: { greater_than_or_equal_to: 0.1, less_than_or_equal_to: 1.0 }, allow_nil: true
   validates :total_expenses, inclusion: { in: [ 100, 500, 1000, 2000, 5000 ] }, allow_nil: true
 
   ##
   # Callbacks
   before_validation :calculate_total_rating!
-  before_validation :calculate_total_weight!
+  before_save :calculate_total_weight!
   # TODO: move this to a service
   after_commit :set_calculated_to_false_in_country
   after_commit :set_calculated_to_false_in_cities
