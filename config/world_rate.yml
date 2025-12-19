@@ -3,8 +3,8 @@ default: &default
     max_results: 50
   reviews_weight:
     description: 0.3,
-    total_expenses: 0.3,
-    safety_rating: 0.1,
+    total_expenses: 0.2,
+    safety_rating: 0.2,
     food_rating: 0.1,
     nightlife_rating: 0.1,
     transportation_rating: 0.1
